@@ -107,9 +107,11 @@ class AuthProgTest(LocalAuthTestMixin, unittest.TestCase):
 # Another approach is to "unshadow" the passwords. The command 'pwunconv' can be
 # used to remove the shadow file and put the hashes in the /etc/passwd file,
 # which is readable by all users.
-class AuthPamTest(LocalAuthTestMixin, unittest.TestCase):
-    def addAuth(self):
-        self.server.addPamAuth('login')
+
+# PAM tests disabled.  Uncomment this if you want to test it.
+#class AuthPamTest(LocalAuthTestMixin, unittest.TestCase):
+#    def addAuth(self):
+#        self.server.addPamAuth('login')
 
 # For AuthImapTest, AuthImapsTest, AuthPop3Test, and AuthApopTest, Dovecot may
 # be used as an authentication server. Under Debian, with the dovecot-imapd and
