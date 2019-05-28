@@ -242,8 +242,8 @@ class AuthMapMixin(RemoteAuthMixin):
     def serverCreate(self):
         # Need to listen on many address to test connecting on different
         # addresses that may map to other addresses.
-        return TestOfmipdServer(['::1', '127.0.0.2', '127.0.0.3', '127.0.0.4',
-                                 '127.0.0.5'])
+        return TestOfmipdServer().init(['::1', '127.0.0.2', '127.0.0.3', '127.0.0.4',
+                                        '127.0.0.5'])
 
     def testMappingAuth(self):
         try:

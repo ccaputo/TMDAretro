@@ -19,7 +19,7 @@ class TestOfmipdServer(object):
     _sslServerOpts = ['--ssl-cert=%s' % certFile,
                       '--ssl-key=%s' % keyFile]
 
-    def __init__(self, addrs=None):
+    def init(self, addrs=None):
         if addrs is None:
             addrs = ['127.0.0.1', '::1']
 
@@ -38,6 +38,7 @@ class TestOfmipdServer(object):
                 self._v6addrs.append((addr, 8025))
             else:
                 self._v4addrs.append((addr, 8025))
+        return self
 
     def start(self):
         # With sys.executable, we make sure the server runs under the same
@@ -75,12 +76,15 @@ class TestOfmipdServer(object):
         addr = (self._v6addrs + self._v4addrs)[0]
         family = socket.AF_INET6 if ':' in addr[0] else socket.AF_INET
         s = socket.socket(family, socket.SOCK_STREAM)
+        from time import sleep
+        sleep(0.1) # wait 1/10th of a second for server to start
         while True:
             try:
                 s.connect(addr)
                 s.close()
                 break
             except socket.error:
+                sleep(1) # try again once per second
                 pass
 
     def stop(self):
@@ -137,7 +141,7 @@ class TestOfmipdServer(object):
         elif addr == 'v4':
             addr = self._v4addrs[0]
 
-        client = TestOfmipdClient(addr)
+        client = TestOfmipdClient().init(addr)
 
         if self._ssl == '--ssl':
             client.ssl()
@@ -147,7 +151,7 @@ class TestOfmipdServer(object):
         return client
 
 class TestOfmipdClient(object):
-    def __init__(self, address, family=None):
+    def init(self, address, family=None):
         if family is None:
             if ':' in address[0]:
                 family = socket.AF_INET6
@@ -160,6 +164,7 @@ class TestOfmipdClient(object):
         self._sock = self._normalSock
         self._ssl = 'off' # or 'ssl', or 'tls'
         self._connected = False
+        return self
 
     # Option setting
 
@@ -267,7 +272,7 @@ class ServerClientMixin(object):
 
     # Override serverCreate to add server options.
     def serverCreate(self):
-        return TestOfmipdServer()
+        return TestOfmipdServer().init()
 
     def serverAddOptions(self):
         pass
