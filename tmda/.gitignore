@@ -1,0 +1,10 @@
+*.pyc
+.ropeproject
+__pycache__
+*~
+*.egg-info
+/build
+/dist
+/env
+/test/.pytest
+/test/home/testuser/config
