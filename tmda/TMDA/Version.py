@@ -29,7 +29,7 @@ import platform
 TMDA = '1.1.12+'
 
 # TMDA version codename
-CODENAME = 'Nikka'
+CODENAME = 'Nikka-TMDAretro'
 
 # Python version
 PYTHON = platform.python_version()

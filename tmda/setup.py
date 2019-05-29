@@ -43,7 +43,7 @@ setup( author = 'Jason R. Mastaler, Kevin Goodsell, Paul Jimenez, Chris Caputo, 
      , package_data =  { 'TMDA': [ 'templates/*' ] }
      , py_modules = []
      , url = 'https://github.com/ccaputo/TMDAretro'
-     , version = '1.1.13'
+     , version = '1.1.12'
      , zip_safe = False
      , install_requires = ['pyOpenSSL>=0.14',
                            'python-pam>=1.8.2',
