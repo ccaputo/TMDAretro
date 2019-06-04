@@ -5,6 +5,25 @@ TMDA is an open source software application designed to significantly reduce the
 
 TMDAretro was created for those who rely on TMDA and need it to continue working with Python 2.7. It was forked from Kevin Goodsell's [tmda-fork](https://github.com/KevinGoodsell/tmda-fork).
 
+## PyPI install:
+
+```sh
+pip2 install [--user] TMDAretro
+```
+
+## Git install & tests:
+
+```sh
+git clone https://github.com/ccaputo/TMDAretro.git
+cd TMDAretro/tmda
+make clean
+make          # to ./env
+make test
+make install  # to ~/.local
+```
+
+## Resources:
+
 [Mailing Lists](https://sf.net/p/tmda/mailman/)
 
 [Old Homepage](http://tmda.net)
