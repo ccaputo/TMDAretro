@@ -6,7 +6,9 @@ TEST_AUTH=test-ofmipd-auth.py
 
 env:
 	virtualenv --python=python2 env
+	mkdir -p env/share/tmda && cp -p -r templates env/share/tmda/templates
 	$(PIP) install -e .
+#	./compileall
 
 test: env pytest-install
 	cd test && ../$(PYTEST) $(PYTEST_ARGS) $(TEST_NONAUTH)
@@ -44,8 +46,14 @@ clean: clean-testf
 	find . -name .pytest_cache | xargs rm -rf
 	find . -name \*.pyc | xargs rm -f
 
-wheel:
-	python2 setup.py bdist_wheel
+dist: env
+	python2 setup.py sdist bdist_wheel
+
+testupload: env
+	pip2 install --user --upgrade twine
+	python2 setup.py sdist bdist_wheel
+	python2 -m twine check dist/*
+	python2 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 release:
 	@if git tag | grep -q TMDAretro-`python2 setup.py -V` ; then\
@@ -53,8 +61,13 @@ release:
 		echo "Update the version number and try again.";\
 		exit 1;\
 	fi
-	# python2 setup.py bdist_wheel upload
-	# python2 setup.py sdist --formats=zip,gztar,bztar upload
-	# git tag TMDAretro-`python2 setup.py -V`
-	# git push
-	# git push --tags
+	pip2 install --user --upgrade twine
+	python2 setup.py sdist bdist_wheel
+	python2 -m twine check dist/*
+	python2 -m twine upload dist/*
+	git tag TMDAretro-`python2 setup.py -V`
+	git push
+	git push --tags
+
+install:
+	pip2 install --user -e .

@@ -25,10 +25,11 @@
 import platform
 
 
-# TMDA version
-TMDA = '1.1.12+'
+# TMDA version = x.y.z.yyyymmdd.rel_for_day
+# rel_for_day starts at zero on a given day
+TMDA = '1.1.13.20190603.4'
 
-# TMDA version codename
+# TMDA version codename from CODENAMES
 CODENAME = 'Nikka-TMDAretro'
 
 # Python version

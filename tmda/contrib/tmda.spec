@@ -1,5 +1,5 @@
 %define name tmda
-%define version 1.1.12
+%define version 1.1.13
 %define release 1
 
 Summary: Tagged Message Delivery Agent
@@ -12,10 +12,10 @@ Group: Utilities/System
 BuildRoot: %{_tmppath}/%{name}-buildroot
 BuildArchitectures: noarch
 Vendor: TMDA Cabal
-Packager: tmda-workers@tmda.net
+Packager: tmda-workers@lists.sourceforge.net
 Url: http://tmda.net/
-BuildRequires: /usr/bin/python2.3
-Requires: /usr/bin/python2.3
+BuildRequires: /usr/bin/python2.7
+Requires: /usr/bin/python2.7
 
 %description
 TMDA is an open source anti-spam system and local mail delivery agent.
@@ -26,7 +26,7 @@ TMDA is an open source anti-spam system and local mail delivery agent.
 %build
 rm -rf %{buildroot}
 #%define pypath %(if [ `type -p python2` ]; then type -p python2; else type -p python; fi)
-%define pypath /usr/bin/python2.3
+%define pypath /usr/bin/python2.7
 
 # fix shbang line in all executable files
 find . -type f -perm 0755 -print | while read i

@@ -45,8 +45,9 @@ try:
     except ImportError:
         pass
 
-    import rfilter
-    rfilter.main()
+    program = sys.argv[0]
+    execdir = os.path.dirname(os.path.abspath(program))
+    execfile(os.path.join(execdir, 'tmda-rfilter'))
 
 except KeyboardInterrupt:
     pass

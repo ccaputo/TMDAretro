@@ -1,1 +1,0 @@
-../bin/tmda-check-address

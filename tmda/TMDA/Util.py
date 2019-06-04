@@ -930,7 +930,7 @@ def maketext(templatefile, vardict):
         searchdirs.append(os.path.join(Defaults.PARENTDIR, 'templates'))
         searchdirs.append(os.path.join(sys.prefix, 'share/tmda'))
         searchdirs.append('/etc/tmda/')
-        searchdirs.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'templates'))
+        searchdirs.append(os.path.join(Defaults.PARENTDIR, 'share/tmda/templates'))
         # Start scanning.
         for dir in searchdirs:
             if dir:
